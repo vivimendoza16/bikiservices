@@ -42,8 +42,10 @@ class servicesCreateListView(APIView):
                 'Adress': request.data['adress']
             }
         respuesta = tabla_Services.put_item(Item=datos_servicio)
-
-        return Response(respuesta)
+        if (respuesta['ResponseMetadata']['HTTPStatusCode'] == 200):
+             respuesta = tabla_Services.scan()
+        return Response('Servicio creado correctamente')
+        #return Response(respuesta['Items'])
 
 
 class servicesRetrieveUpdateDestroyView(APIView):
@@ -79,7 +81,7 @@ class servicesRetrieveUpdateDestroyView(APIView):
             else:
                 raise
         else:
-            return Response(status=204)
+            return Response ('El servicio ha sido eliminado')
 
     def put(self,request,id=None):
         try:
@@ -113,6 +115,12 @@ class servicesRetrieveUpdateDestroyView(APIView):
             else:
                 raise
         else:
-            return Response(response)
+            if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+                response = tabla_Services.get_item(
+                    Key={
+                     'id': id
+                    }
+                )
+            return Response(response['Item'])
 
 
