@@ -15,7 +15,7 @@ import json
 from botocore.exceptions import ClientError
 
 region = os.environ.get( 'AWS_DEFAULT_REGION' )
-dynamodb = boto3.resource( 'dynamodb', region_name=region)
+dynamodb = boto3.resource( 'dynamodb', region_name='us-west-2')
 tabla_Services = dynamodb.Table('Services' )
 
 class servicesCreateListView(APIView):
