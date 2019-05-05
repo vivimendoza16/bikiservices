@@ -2,6 +2,7 @@ from __future__ import print_function
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
 from service.models import services
 from .serializers import servicesSerializer
 from django.http import HttpResponse, JsonResponse
@@ -31,6 +32,11 @@ class servicesCreateListView(APIView):
 
         UUID=uuid.uuid4()
         number=str(UUID)
+        #dat=json.loads(request.data)
+        #dit=json.dumps(request.data)
+        #print (json.loads(request.data))
+        #print (json.loads(request.data)['type'])
+        #print(json.dumps(request.data)[1])
         #number=5
         datos_servicio = {
                 'id':number,
@@ -38,14 +44,17 @@ class servicesCreateListView(APIView):
                 'Name': request.data['name'],
                 'Description': request.data['description'],
                 'Price': request.data['price'],
-                'Phone':request.data['phone'],
-                'Adress': request.data['adress']
+                'Phone': request.data['phone'],
+                'Address': request.data['address']
             }
         respuesta = tabla_Services.put_item(Item=datos_servicio)
         if (respuesta['ResponseMetadata']['HTTPStatusCode'] == 200):
              respuesta = tabla_Services.scan()
         return Response('Servicio creado correctamente')
         #return Response(respuesta['Items'])
+
+    def get_serializer_context(self, *args, **kwargs):
+        return {"request":self.request}
 
 
 class servicesRetrieveUpdateDestroyView(APIView):
@@ -96,7 +105,7 @@ class servicesRetrieveUpdateDestroyView(APIView):
                     ":d": request.data['Description'],
                     ":pr": request.data['Price'],
                     ":ph": request.data['Phone'],
-                    ":a": request.data['Adress'],
+                    ":a": request.data['Address'],
                 },
                 ExpressionAttributeNames={
                     "#ty": "Type",
@@ -104,7 +113,7 @@ class servicesRetrieveUpdateDestroyView(APIView):
                     "#des": "Description",
                     "#pr": "Price",
                     "#ph": "Phone",
-                    "#ad": "Adress"
+                    "#ad": "Address"
                 },
                 ReturnValues="UPDATED_NEW"
             )
@@ -122,5 +131,8 @@ class servicesRetrieveUpdateDestroyView(APIView):
                     }
                 )
             return Response(response['Item'])
+
+    def get_serializer_context(self, *args, **kwargs):
+        return {"request":self.request}
 
 
