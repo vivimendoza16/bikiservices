@@ -34,3 +34,10 @@ class ServicesAPITestCase(APITestCase):
          response=self.client.put(url,data,format='json')
          self.assertEqual(response.status_code,status.HTTP_200_OK)
          print(response.data)
+
+     def test_delete_service(self):
+         data={}
+         url = api_reverse("getservice", args=['f09f1359-1bd9-4b90-8f85-5abdd0894745'])
+         response = self.client.delete(url, data, format='json')
+         self.assertEqual(response.status_code, status.HTTP_200_OK)
+         print(response.data)
