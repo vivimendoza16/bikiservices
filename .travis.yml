@@ -9,8 +9,7 @@ matrix:
       language: shell       # 'language: python' is an error on Travis CI Windows
       before_install: 
             - choco install python
-            - python -m pip install --upgrade pip wheel
-      env: PATH=/C/Users/vcmb1:/c/Users/vcmb1/Scripts:$PATH
+      env: PATH=/C/Users/vcmb1:/C/Users/vcmb1/Scripts:$PATH
 install:
   - pip install -r requirements.txt
 script: python manage.py test
