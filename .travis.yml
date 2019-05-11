@@ -10,6 +10,6 @@ script: python manage.py test
 deploy:
   provider: heroku
   api_key:
-    secure: API_KEY
+    secure: "API_KEY"
   app: bikiservices
 
