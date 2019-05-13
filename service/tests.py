@@ -23,13 +23,13 @@ class ServicesAPITestCase(APITestCase):
 
      def test_get_service(self):
          data={}
-         url= api_reverse("getservice", args=['ce740157-bc6a-4d30-9794-10cd2f2aaf9d'])
+         url= api_reverse("getservice", args=['2da76876-420e-4497-bdfe-528f8e10714e'])
          response=self.client.get(url,data,format='json')
          self.assertEqual(response.status_code,status.HTTP_200_OK)
          print(response.data)
 
      def test_put_service(self):
-         data = {"id":"2da76876-420e-4497-bdfe-528f8e10714e","Type":"servicio","Name":"parkibike","Description":"tarifa por minuto","Price":"60", "Phone":"+54 3785643", "Address":"calle 23#56-34"}
+         data = {"id":"1d04996d-1d61-40f5-8738-13cd37b4f230","Type":"servicio","Name":"parkibike","Description":"tarifa por minuto","Price":"60", "Phone":"+54 3785643", "Address":"calle 23#56-34"}
          url= api_reverse("getservice", args=['2da76876-420e-4497-bdfe-528f8e10714e'])
          response=self.client.put(url,data,format='json')
          self.assertEqual(response.status_code,status.HTTP_200_OK)
@@ -37,7 +37,7 @@ class ServicesAPITestCase(APITestCase):
 
      def test_delete_service(self):
          data={}
-         url = api_reverse("getservice", args=['f09f1359-1bd9-4b90-8f85-5abdd0894745'])
+         url = api_reverse("getservice", args=['a1631e8e-f202-4e3d-99b8-0ce5ce696a24'])
          response = self.client.delete(url, data, format='json')
          self.assertEqual(response.status_code, status.HTTP_200_OK)
          print(response.data)
