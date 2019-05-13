@@ -37,7 +37,7 @@ class ServicesAPITestCase(APITestCase):
 
      def test_delete_service(self):
          data={}
-         url = api_reverse("getservice", args=['a1631e8e-f202-4e3d-99b8-0ce5ce696a24'])
+         url = api_reverse("getservice", args=['7e9a053c-1f56-4dd2-9a5d-e8d3091db8ed'])
          response = self.client.delete(url, data, format='json')
          self.assertEqual(response.status_code, status.HTTP_200_OK)
          print(response.data)
